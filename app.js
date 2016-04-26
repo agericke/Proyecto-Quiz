@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var partials = require('express-partials');
 
 var routes = require('./routes/index');
 //var users = require('./routes/users');
@@ -13,6 +14,8 @@ var app = express(); //Crea aplicacion express
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));//Instalaparametro de views, se le pasa en ruta el views como directorio. join es un metodo del modulo path que asocia el directorio de quiz con el directorio views y crea el path
 app.set('view engine', 'ejs');//Proque hemos puesto ejs al generar al proyecto. ejs es el renderizador utilizado por Ruby
+
+app.use(partials());
 
 // uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/favicon.ico')); //_dirname representa el directorio absoluto del sistema (donde est'a app.js (directorio quiz en nuestro caso))
