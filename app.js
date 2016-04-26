@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);//Intslar enrutadores. El index en la ruta base
+app.use('/', routes);//Instalar enrutadores. El index en la ruta base
 //app.use('/users', users);//El segundo lo instalamos en la ruta users
 
 // catch 404 and forward to error handler
