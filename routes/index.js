@@ -12,4 +12,6 @@ router.get('/', function(req, res) {//Metemos el get al pth vacio, raiz.
 router.get('/quizes/question', quizController.question);
 router.get('/quizes/answer', quizController.answer);
 
+router.get('/author', quizController.author);
+
 module.exports = router;
