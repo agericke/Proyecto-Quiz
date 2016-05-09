@@ -1,21 +1,17 @@
 var models = require('../models/models.js');
 
-// GET /quizes/question
-exports.question = function(req, res) {
-  models.Quiz.findAll().success(function(quiz) {
-    res.render('quizes/question', { pregunta: quiz[0].pregunta, title: 'Intenta responder'});
-  })
+// GET /question
+exports.question = function(req, res, next) {
+  var answer = req.query.answer || '';
+  res.render('quizzes/question', {title:'Intenta responder', question: '¿Capital de Italia?', answer: answer});
 };
 
-// GET /quizes/answer
-exports.answer = function(req, res) {
-  models.Quiz.findAll().success(function(quiz) {
-    if (req.query.respuesta === quiz[0].respuesta) {
-      res.render('quizes/answer', { respuesta: 'Correcto', title: 'Repuesta Buena'});
-    } else {
-      res.render('quizes/answer', { respuesta: 'Incorrecto', title: 'Respuesta mala'});
-    }
-  })
+// GET /check
+exports.check = function(req, res, next) {
+  var answer = req.query.answer || "";
+  
+  var result = ((answer === 'Roma') ? 'Correcta' : 'Incorrecta');
+  res.render('quizzes/result', {result: result, title: 'Respuesta '+result, answer:answer});
 };
 
 //Get /author
