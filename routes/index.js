@@ -6,7 +6,7 @@ var quizController = require('../controllers/quiz_controller');
 
 /* GET home page. */
 router.get('/', function(req, res) {//Metemos el get al pth vacio, raiz.
-  res.render('index', { title: 'Quiz' });
+  res.render('index', { title: 'Cambiando titulos' });
 });
 
 router.get('/question', quizController.question);

@@ -44,6 +44,7 @@ if (app.get('env') === 'development') {//parametro env de la aplicacion sea deve
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
+            title: 'Error',
             message: err.message,
             error: err //print err
         });
@@ -56,9 +57,9 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
+        title: 'Error',
         error: {}//Stack de errores esta vacio
     });
 });
-
 
 module.exports = app;
