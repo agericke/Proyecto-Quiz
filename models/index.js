@@ -16,7 +16,7 @@ if(!process.env.DATABASE_URL) {
     storage = "quiz.sqlite";
 } else {
     url = process.env.DATABASE_URL;
-    storage = process.env.DATABASE_STORAGE || '';
+    storage = process.env.DATABASE_STORAGE || "";
 }
 
 var sequelize = new Sequelize(url,
