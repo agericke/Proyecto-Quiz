@@ -7,7 +7,7 @@ var Sequelize = require('sequelize');
 //     DATABASE_URL = sqlite:///
 //     DATABASE_STORAGE = quiz.sqlite
 // Usar DDBB Postgres:
-//     DATABASE_URL = postgres://ecbifmjhunduqw:6i29nLNpm37Tk9gGoPgfio0QwC@ec2-54-235-119-29.compute-1.amazonaws.com:5432/de290rctavbicv
+//     DATABASE_URL = 
 
 var url, storage;
 
