@@ -2,13 +2,16 @@ var models = require('../models/index.js');
 
 //GET /quizzes Acción para mostrar el índice de preguntas
 exports.index = function(req, res, next) {
+  var search = req.query.search || "";
   models
   .Quiz
-  .findAll()
+  .findAll({where: {question: {$like: "%"+search+"%"}}})
   .then(function(quizzes) {
-    res.render('quizzes/index.ejs', { quizzes: quizzes, title:'Lista Preguntas'});
+    if (quizzes){
+      res.render('quizzes/index.ejs', { quizzes: quizzes, title:'Lista Preguntas'}); 
+    } else  {throw new Error('No existe ese quiz en la BBDD');}
   })
-  .catch(function(error) { next(error)});
+  .catch(function(error) { next(error)}); 
 };
 
 // GET /question
