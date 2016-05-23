@@ -9,8 +9,12 @@ router.get('/', function(req, res) {//Metemos el get al pth vacio, raiz.
   res.render('index', { title: 'Cambiando titulos' });
 });
 
-// router.get('/question', quizController.question);
-// router.get('/check', quizController.check);
+//Aoutoload de rutas que usen :quizId
+//Si existe parámetro quizId en la ruta, entonces invoca
+//quizController.load ( ejecuta funcion autoload y queda cargada)
+router.param('quizId', quizController.load); //autoload :quizId
+//Se instala para que se ejecute antes que lo necesiten
+//las rutas show y answer y solo en caso de que path contenga :id
 
 //DEfinicion de rutas de /quizzes
 router.get('/quizzes', quizController.index);
