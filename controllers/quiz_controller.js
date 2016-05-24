@@ -14,6 +14,20 @@ exports.load = function(req, res, next, quizId) {
 };
 
 //GET /quizzes Acción para mostrar el índice de preguntas
+exports.search = function(req, res, next) {
+  var search1 = req.query.search1 || "";
+  models
+  .Quiz
+  .findAll({where: {question: {$like: "%"+search1+"%"}}})
+  .then(function(quizzes) {
+    if (quizzes){
+      res.render('quizzes/index.ejs', { quizzes: quizzes, title:'Lista Preguntas de search1'}); 
+    } else  {throw new Error('No existe ese quiz en la BBDD');}
+  })
+  .catch(function(error) { next(error)}); 
+};
+
+//GET /quizzes Acción para mostrar el índice de preguntas
 exports.index = function(req, res, next) {
   var search = req.query.search || "";
   models
