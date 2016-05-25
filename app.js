@@ -4,7 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 var partials = require('express-partials');
+var flash = require('express-flash');
 
 var routes = require('./routes/index');
 //var users = require('./routes/users');
@@ -16,6 +18,7 @@ app.set('views', path.join(__dirname, 'views'));//Instalaparametro de views, se 
 app.set('view engine', 'ejs');//Proque hemos puesto ejs al generar al proyecto. ejs es el renderizador utilizado por Ruby
 
 app.use(partials());
+app.use(flash());
 
 // uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/favicon.ico')); //_dirname representa el directorio absoluto del sistema (donde est'a app.js (directorio quiz en nuestro caso))
@@ -23,6 +26,9 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(session({secret:"Quiz 2016",
+                 resave: false,
+                 saveUninitialized: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);//Instalar enrutadores. El index en la ruta base

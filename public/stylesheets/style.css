@@ -28,3 +28,21 @@ header, nav, section, footer{
 nav span{
  margin: 0px 10px 0px 0px;
 }
+
+/*css relacionado con mensajes flash*/
+#mensajes ul {
+  list-style-position: inside;
+  background-color: #FFE4E1;
+}
+
+#flashsuccess h3 {
+    background-color: #0d0;
+}
+
+#flasherror h3 {
+    background-color: #d00000;
+}
+
+#flashinfo h3 {
+    background-color: #DEB887;
+}

@@ -22,6 +22,10 @@ section{
     height: 200px;
 }
 
+#mensajes {
+    height: auto;
+}
+
 footer{
     clear: both;
     display: block;

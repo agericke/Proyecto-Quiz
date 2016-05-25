@@ -17,3 +17,10 @@ body {
 footer, input {
     font-size: large;
 }
+
+#mensajes {
+    font-size: medium;
+}
+#mensajes h3 {
+    display: block;
+}
