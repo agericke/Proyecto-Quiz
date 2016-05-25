@@ -18,7 +18,7 @@ exports.search = function(req, res, next) {
   var search1 = req.query.search1 || "";
   models
   .Quiz
-  .findAll({where: {question: {$like: "%"+search1+"%"}}})
+  .findAll({where: {question: {$like: "%"+search1+"%"}}, order:['question']})
   .then(function(quizzes) {
     if (quizzes){
       res.render('quizzes/index.ejs', { quizzes: quizzes, title:'Lista Preguntas de search1'}); 
@@ -32,7 +32,7 @@ exports.index = function(req, res, next) {
   var search = req.query.search || "";
   models
   .Quiz
-  .findAll({where: {question: {$like: "%"+search+"%"}}})
+  .findAll({where: {question: {$like: "%"+search+"%"}}, order:[['question', 'DESC']] })
   .then(function(quizzes) {
     if (quizzes){
       res.render('quizzes/index.ejs', { quizzes: quizzes, title:'Lista Preguntas'}); 
@@ -60,7 +60,7 @@ exports.autor = function(req,res) {
 }
 
 //GET /quizzes/new
-exports.new = function(req, res, next){
+exports.new = function(req, res, next) {
   var quiz = models.Quiz.build({question:"", answer: ""});
   res.render("quizzes/new", {quiz: quiz, title: "Pregunta Nueva"});
 };
