@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var partials = require('express-partials');
 var flash = require('express-flash');
+var methodOverride = require('method-override');
 
 var routes = require('./routes/index');
 //var users = require('./routes/users');
@@ -19,6 +20,7 @@ app.set('view engine', 'ejs');//Proque hemos puesto ejs al generar al proyecto. 
 
 app.use(partials());
 app.use(flash());
+app.use(methodOverride('_method', {methods: ["POST", "GET"]}));
 
 // uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/favicon.ico')); //_dirname representa el directorio absoluto del sistema (donde est'a app.js (directorio quiz en nuestro caso))
