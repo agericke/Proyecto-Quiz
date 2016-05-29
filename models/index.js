@@ -6,10 +6,7 @@ var Sequelize = require('sequelize');
 // Postgres DATABASE_URL = postgres://user:passwd@host:port/database
 // SQLite   DATABASE_URL = sqlite://:@:/
 var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
-<<<<<<< HEAD
 
-=======
->>>>>>> af79b594f5b680747c02b123049d0ba48f4eccd2
 var DATABASE_PROTOCOL = url[1];
 var DATABASE_DIALECT  = url[1];
 var DATABASE_USER     = url[2];
@@ -35,6 +32,8 @@ var sequelize = new Sequelize(DATABASE_NAME,
 // Importar la definicion de la tabla Quiz en quiz.js
 var Quiz = sequelize.import(path.join(__dirname,'quiz'));
 
+/* Usare Migraciones y Seeders
+
 //sequelize.sync() crea e inicializa tabla de preguntas en DB
 sequelize.
 sync()
@@ -54,6 +53,8 @@ sync()
     console.log("Error Sincronizando las tablas de la BBDD:", error);
     process.exit(1);
 });
+
+*/
 
 exports.Quiz = Quiz; // exportar definición de tabla Quiz
 
