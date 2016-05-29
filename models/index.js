@@ -6,7 +6,10 @@ var Sequelize = require('sequelize');
 // Postgres DATABASE_URL = postgres://user:passwd@host:port/database
 // SQLite   DATABASE_URL = sqlite://:@:/
 var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
+<<<<<<< HEAD
 
+=======
+>>>>>>> af79b594f5b680747c02b123049d0ba48f4eccd2
 var DATABASE_PROTOCOL = url[1];
 var DATABASE_DIALECT  = url[1];
 var DATABASE_USER     = url[2];
