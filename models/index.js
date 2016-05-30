@@ -35,6 +35,9 @@ var Quiz = sequelize.import(path.join(__dirname,'quiz'));
 //Importar la definición de la tabla Comments de comment.js
 var Comment = sequelize.import(path.join(__dirname,'comment'));
 
+// Importar la definicion de la tabla Users de user.js
+var User = sequelize.import(path.join(__dirname,'user'));
+
 //Relaciones entre modelos
 Comment.belongsTo(Quiz); //Comment pertenece a un quiz
 Quiz.hasMany(Comment); //quiz puede tener muchos comments
@@ -65,3 +68,4 @@ sync()
 
 exports.Quiz = Quiz; // exportar definición de tabla Quiz
 exports.Comment = Comment; //exportar definición de tabla Comments
+exports.User = User; //exportar definicion de tabla Users
