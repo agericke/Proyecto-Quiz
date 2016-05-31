@@ -20,6 +20,17 @@ var app = express(); //Crea aplicacion express
 app.set('views', path.join(__dirname, 'views'));//Instalaparametro de views, se le pasa en ruta el views como directorio. join es un metodo del modulo path que asocia el directorio de quiz con el directorio views y crea el path
 app.set('view engine', 'ejs');//Proque hemos puesto ejs al generar al proyecto. ejs es el renderizador utilizado por Ruby
 
+// En produccion (Heroku) redirijo las peticiones http a https.
+// Documentacion: http://jaketrent.com/post/https-redirect-node-heroku/
+if (app.get('env') === 'production') {
+    app.use(function(req, res, next) {
+        if (req.headers['x-forwarded-proto'] !== 'https') {
+            res.redirect('https://' + req.get('Host') + req.url);
+        } else { 
+            next() /* Continue to other routes if we're not redirecting */
+        }
+    });
+}
 // uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/favicon.ico')); //_dirname representa el directorio absoluto del sistema (donde est'a app.js (directorio quiz en nuestro caso))
 app.use(logger('dev'));
