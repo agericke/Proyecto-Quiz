@@ -29,6 +29,8 @@ nav span{
  margin: 0px 10px 0px 0px;
 }
 
+.right {float: right;}
+
 /*css relacionado con mensajes flash*/
 #mensajes ul {
   list-style-position: inside;

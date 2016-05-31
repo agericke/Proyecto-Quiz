@@ -18,10 +18,6 @@ var app = express(); //Crea aplicacion express
 app.set('views', path.join(__dirname, 'views'));//Instalaparametro de views, se le pasa en ruta el views como directorio. join es un metodo del modulo path que asocia el directorio de quiz con el directorio views y crea el path
 app.set('view engine', 'ejs');//Proque hemos puesto ejs al generar al proyecto. ejs es el renderizador utilizado por Ruby
 
-app.use(partials());
-app.use(flash());
-app.use(methodOverride('_method', {methods: ["POST", "GET"]}));
-
 // uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/favicon.ico')); //_dirname representa el directorio absoluto del sistema (donde est'a app.js (directorio quiz en nuestro caso))
 app.use(logger('dev'));
@@ -31,7 +27,20 @@ app.use(cookieParser());
 app.use(session({secret:"Quiz 2016",
                  resave: false,
                  saveUninitialized: true}));
+app.use(methodOverride('_method', {methods: ["POST", "GET"]}));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(partials());
+app.use(flash());
+
+// Helper dinamico:
+app.use(function(req, res, next) {
+
+   // Hacer visible req.session en las vistas
+   res.locals.session = req.session;
+
+   next();
+});
 
 app.use('/', routes);//Instalar enrutadores. El index en la ruta base
 //app.use('/users', users);//El segundo lo instalamos en la ruta users

@@ -16,16 +16,17 @@
   <tbody>
     <% for (var i in users) { %>
       <tr>
-      <td> <%= users[i].username %>  </td>
+        <td> <%= users[i].username %>  </td>
 
-         <td> <%= users[i].isAdmin ? "Si" : "No" %> </td>
+        <td> <%= users[i].isAdmin ? "Si" : "No" %> </td>
 
-         <td> <a href="/users/<%= users[i].id %>" > Ver </a>
-              <a href="/users/<%= users[i].id %>/edit"> Editar </a>
-              <a href="/users/<%= users[i].id %>?_method=DELETE" 
+        <td> 
+          <a href="/users/<%= users[i].id %>" > Ver </a>
+          <a href="/users/<%= users[i].id %>/edit"> Editar </a>
+          <a href="/users/<%= users[i].id %>?_method=DELETE" 
                  onClick="return confirm('Borrar cuenta: <%= users[i].username %>');" >
                  Borrar </a> 
-         </td>
+        </td>
       </tr>
     <%  }; %>
   </tbody>
@@ -38,4 +39,4 @@
       </a> 
   </nav>
 </footer>
-<section>
+</section>
