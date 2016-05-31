@@ -17,6 +17,7 @@ router.get('/', function(req, res) {//Metemos el get al pth vacio, raiz.
 //quizController.load ( ejecuta funcion autoload y queda cargada)
 router.param('quizId', quizController.load); //autoload :quizId
 router.param('userId', userController.load); //autoload :userId
+router.param('commentId', commentController.load); //autoload :commentId
 //Se instala para que se ejecute antes que lo necesiten
 //las rutas show y answer y solo en caso de que path contenga :id
 
@@ -48,5 +49,7 @@ router.get('/author', quizController.autor);
 
 router.get('/quizzes/:quizId(\\d+)/comments/new', sessionController.loginRequired, commentController.new);
 router.post('/quizzes/:quizId(\\d+)/comments', sessionController.loginRequired, commentController.create);
+router.put('/quizzes/:quizId(\\d+)/comments/:commentId(\\d+)/accept', sessionController.loginRequired,
+                                                                    commentController.accept);
 
 module.exports = router;

@@ -61,7 +61,7 @@ exports.create = function(req, res, next) {
                 return user.save({fields: ["username", "password", "salt"]})
                     .then(function(user) { // Renderizar pagina de usuarios
                         req.flash('success', 'Usuario creado con éxito.');
-                        res.redirect('/users/'+user.id);
+                        res.redirect('/session');
                     })
                     .catch(Sequelize.ValidationError, function(error) {
                         req.flash('error', 'Errores en el formulario:');

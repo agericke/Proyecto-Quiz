@@ -12,7 +12,7 @@ var methodOverride = require('method-override');
 var routes = require('./routes/index');
 //var users = require('./routes/users');
 
-var sessionController = require ('./controllers/session_controller');
+// var sessionController = require ('./controllers/session_controller');
 
 var app = express(); //Crea aplicacion express
 
@@ -29,7 +29,8 @@ app.use(cookieParser());
 app.use(session({secret:"Quiz 2016",
                  resave: false,
                  saveUninitialized: true,
-                 cookie: {maxAge: 20000}}));
+                //  cookie: {maxAge: 20000}
+                }));
 app.use(methodOverride('_method', {methods: ["POST", "GET"]}));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -49,17 +50,17 @@ app.use(function(req, res, next) {
 app.use('/', routes);//Instalar enrutadores. El index en la ruta base
 //app.use('/users', users);//El segundo lo instalamos en la ruta users
 
-app.get('*', function (req, res, next) {
-     if (req.session.user) {
-        if (req.session.cookie.maxAge === 0 || req.session.cookie.maxAge<0){
-            sessionController.destroy;
-        } else {
-            req.session.cookie.maxAge = 20000;
-        }
-    } else {
-        next();
-    }
-});
+// app.get('*', function (req, res, next) {
+//      if (req.session.user) {
+//         if (req.session.cookie.maxAge === 0 || req.session.cookie.maxAge<0){
+//             sessionController.destroy;
+//         } else {
+//             req.session.cookie.maxAge = 20000;
+//         }
+//     } else {
+//         next();
+//     }
+// });
 // catch 404 and forward to error handler
 //Va a estar asociadas a todo el resto de rutas que no sean las otras dos. Se ejecutara esto siempre que no sea una de las rutas definidas arriba
 app.use(function(req, res, next) {

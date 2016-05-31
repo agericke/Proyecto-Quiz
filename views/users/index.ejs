@@ -36,11 +36,12 @@
   </tbody>
 </table>
 
-<footer>
-  <nav> 
-      <a href="/users/new" > 
-           Crear nuevo Usuario 
-      </a> 
-  </nav>
-</footer>
-</section>
+<% if (session.user) { %>
+  <footer>
+    <nav> 
+        <a href="/users/new" > 
+             Crear nuevo Usuario 
+        </a> 
+    </nav>
+  </footer>
+<% } %>
