@@ -32,7 +32,7 @@ if (app.get('env') === 'production') {
     });
 }
 // uncomment after placing your favicon in /public
-app.use(favicon(__dirname + '/public/favicon.ico')); //_dirname representa el directorio absoluto del sistema (donde est'a app.js (directorio quiz en nuestro caso))
+app.use(favicon(__dirname + '/public/favicon.ico')); //_dirname representa el directorio absoluto del sistema (donde está app.js (directorio quiz en nuestro caso))
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
