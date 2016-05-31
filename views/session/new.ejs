@@ -1,7 +1,9 @@
 <h2>Login</h2>
 
 <form method='POST' action='/session'>
-
+  
+  <input type='hidden' name='redir' value='<%= redir %>'>
+  
   <div>
     <label for="login">Login:</label>
     <br />

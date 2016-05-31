@@ -9,7 +9,11 @@
 </p>
 
 <p>
-    <a href="/quizzes/<%= quiz.id%>/comments/new"><button>Nuevo comentario</button></a>
+    <% if (session.user) { %>
+        <p>
+            <a href="/quizzes/<%= quiz.id %>/comments/new"><button>Nuevo comentario</button></a>
+        </p>
+    <% } %>
 </p>
 
 <p><strong>Comentarios:</strong></p>
