@@ -3,7 +3,7 @@ var userController = require('./user_controller');
 
 // GET /session   -- Formulario de login
 exports.new = function(req, res, next) {
-    res.render('session/new', {title:"Registrarse"});
+    res.render('session/new', {title:"Log in"});
 };
 
 

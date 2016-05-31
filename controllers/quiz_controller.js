@@ -68,11 +68,14 @@ exports.new = function(req, res, next) {
 
 //POST /quizzes/create
 exports.create = function(req, res, next) {
+  
+  var authorId = req.session.user && req.session.user.id || 0;
   var quiz = models.Quiz.build({ question: req.body.quiz.question,
-                                 answer: req.body.quiz.answer});
+                                 answer: req.body.quiz.answer,
+                                 AuthorId: authorId} );
   
 //guarda en DB los campos pregunta y respuesta de quiz
-  quiz.save({fields: ["question", "answer"]})
+  quiz.save({fields: ["question", "answer", "AuthorId"]})
     .then(function(quiz) {
       req.flash('success', 'Quiz creado con éxito.');
       res.redirect('/quizzes'); //res.redirect:
@@ -97,6 +100,7 @@ exports.edit = function (req, res, next){
   var quiz = req.quiz; //req.quiz: autoload de instrancia de quiz
   res.render('quizzes/edit', {quiz:quiz, title:"Editar pregunta"});
 };
+
 // PUT /quizzes/:id
 exports.update = function(req, res, next){
   
