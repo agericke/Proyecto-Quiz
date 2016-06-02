@@ -71,7 +71,7 @@ app.use( function (req, res, next) {
         console.log('El valor del time de la sesión es: '+req.session.user.expires);
         console.log('El valor del time al entrar es: '+nuevaHora);
         console.log('El valor dela diferencia es '+diferencia);
-        if (diferencia > 20000){
+        if (diferencia > 120000){
             console.log('Se ha pasado el timeout');
              delete req.session.user;
             res.redirect("/session"); 
