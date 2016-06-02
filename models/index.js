@@ -49,9 +49,13 @@ Quiz.hasMany(Comment); //quiz puede tener muchos comments
 User.hasMany(Quiz, {foreignKey: 'AuthorId'});
 Quiz.belongsTo(User, {as: 'Author', foreignKey: 'AuthorId'});
 
-//Relación 1-a-1 entre Qui y Attachment
+//Relación 1-a-1 entre Quiz y Attachment
 Attachment.belongsTo(Quiz);
 Quiz.hasOne(Attachment);
+
+//RElación 1-a-N entre User y Comments
+User.hasMany(Comment, {foreignKey: 'AuthorId'});
+Comment.belongsTo(User, {as: 'Author', foreignKey: 'AuthorId'});
 
 /* Usare Migraciones y Seeders
 
