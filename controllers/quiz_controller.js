@@ -56,17 +56,37 @@ exports.index = function(req, res, next) {
   .Quiz
   .findAll({where: {question: {$like: "%"+search+"%"}}, order:[['question', 'DESC']], include: [ models.Attachment ] })
   .then(function(quizzes) {
-    if (quizzes){
+    
+    //Compruebo el formato con el que se envía la petición
+    if ((!req.params.format) || (req.params.format === "html")){
+      if (quizzes){
       res.render('quizzes/index.ejs', { quizzes: quizzes, title:'Lista Preguntas'}); 
-    } else  {throw new Error('No existe ese quiz en la BBDD');}
+      } else  {throw new Error('No existe ese quiz en la BBDD');} 
+    }
+    else if (req.params.format ==="json") {
+      res.send(JSON.stringify(quizzes)); 
+    }
+    else {
+       throw new Error('No se admite format=' + req.params.format);
+    }
   })
-  .catch(function(error) { next(error)}); 
+  .catch(function(error) { 
+    next(error)
+  }); 
 };
 
 //GET /quizzes/:quizId
 exports.show = function(req, res, next) {
   var answer = req.query.answer || "";
-  res.render("quizzes/show", {quiz: req.quiz, answer: answer, title:'Pregunta especifica'});
+  if ((!req.params.format) || (req.params.fotmat === "html")){
+    res.render("quizzes/show", {quiz: req.quiz, answer: answer, title:'Pregunta especifica'}); 
+  }
+  else if (req.params.format === 'json') {
+    res.send(JSON.stringify(req.quiz));
+  }
+  else {
+    next(new Error ('No se admite format=' +req.params.format));
+  }
 };
 
 //GET /quizzes/:quizId/check
