@@ -12,6 +12,8 @@ var methodOverride = require('method-override');
 var routes = require('./routes/index');
 //var users = require('./routes/users');
 
+var userController = require('./controllers/session_controller');
+
 // var sessionController = require ('./controllers/session_controller');
 
 var app = express(); //Crea aplicacion express
@@ -40,7 +42,6 @@ app.use(cookieParser());
 app.use(session({secret:"Quiz 2016",
                  resave: false,
                  saveUninitialized: true,
-                //  cookie: {maxAge: 20000}
                 }));
 app.use(methodOverride('_method', {methods: ["POST", "GET"]}));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -58,20 +59,38 @@ app.use(function(req, res, next) {
 });
 
 
+//Midleware de autologout
+app.use( function (req, res, next) {
+     var nuevaHora = new Date();
+    if (req.session && req.session.user) {
+        var horaUltima = req.session.user.expires;
+        console.log('Existe Sesión y ha entrado en MW autologout');
+        var valor1 = nuevaHora.valueOf();
+        console.log('Hora pasada a milisegundos: '+valor1);
+        var diferencia = valor1 - horaUltima;
+        console.log('El valor del time de la sesión es: '+req.session.user.expires);
+        console.log('El valor del time al entrar es: '+nuevaHora);
+        console.log('El valor dela diferencia es '+diferencia);
+        if (diferencia > 20000){
+            console.log('Se ha pasado el timeout');
+             delete req.session.user;
+            res.redirect("/session"); 
+        } else {
+            console.log('actualiza variable expires');
+            var nuevaHoraAGuardar = new Date();
+            req.session.user.expires = nuevaHoraAGuardar.valueOf();
+         next();
+        }
+    } else {
+        console.log('No existe sesión');
+     next();
+    }
+});
+
 app.use('/', routes);//Instalar enrutadores. El index en la ruta base
+
 //app.use('/users', users);//El segundo lo instalamos en la ruta users
 
-// app.get('*', function (req, res, next) {
-//      if (req.session.user) {
-//         if (req.session.cookie.maxAge === 0 || req.session.cookie.maxAge<0){
-//             sessionController.destroy;
-//         } else {
-//             req.session.cookie.maxAge = 20000;
-//         }
-//     } else {
-//         next();
-//     }
-// });
 // catch 404 and forward to error handler
 //Va a estar asociadas a todo el resto de rutas que no sean las otras dos. Se ejecutara esto siempre que no sea una de las rutas definidas arriba
 app.use(function(req, res, next) {

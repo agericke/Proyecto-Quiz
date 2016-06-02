@@ -17,7 +17,7 @@ exports.load = function(req, res, next, quizId) {
         } else {
           next(new Error('No existe quizId=' +quizId));
         }
-    }).catch(function(error) { next(error); })
+    }).catch(function(error) { next(error); });
 };
 
 // MW que permite acciones solamente si al usuario logeado es admin o es el autor del quiz.
